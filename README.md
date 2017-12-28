@@ -7,8 +7,8 @@ Web application to create, store and manage data base of users and anonymous rev
 
 For install and work with application you are need:
 
-npm: '3.5.2' or higher
-node: '4.2.6' or higher
+npm: '5.6.0'
+node: '9.3.0'
 
 ## Getting Started
 
