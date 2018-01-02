@@ -1,0 +1,115 @@
+.userListBlock {
+    display: block;
+    float: left;
+    width: 25%;
+    min-height: 500px;
+    background-color: whitesmoke;
+    padding-top: 12px;
+    box-sizing: border-box;
+
+    .addUserBtn{
+        width: 80%;
+    }
+
+    ul{
+        list-style-type: none;
+        width: 90%;
+        -webkit-padding-start: 20px;
+        -moz-padding-start: 20px;
+
+        .userListItem{
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            cursor: default;
+            height: 40px;
+            margin: 2px 0;
+            box-sizing: border-box;
+
+            span{
+                box-sizing: border-box;
+                height: 40px;
+            }
+
+            .user {
+                width: 90%;
+                display: inline-flex;
+                height: 40px;
+                align-items: center;
+                cursor: pointer;
+                border: 2px solid rgba(0, 0, 0, 0);
+
+                &.active{
+                    border: 2px solid #6b6767;
+                    border-radius: 2px;
+                }
+
+                .userIcon{
+                    width: 15%;
+                    display: inline-flex;
+                    align-items: center;
+                }
+
+                .userName {
+                    width: 85%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-align: left;
+                    padding-left: 10px;
+                    font-size: 21px;
+                    text-overflow: ellipsis;
+                    display: inline-flex;
+                    align-items: center;
+                }
+            }
+
+            .userContextMenuBtn {
+                width: 10%;
+                cursor: pointer;
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                border: 1px solid rgba(0, 0, 0, 0);
+
+                &.active, &:hover{
+                    border: 1px solid #6b6767;
+                    border-radius: 2px;
+                }
+            }
+        }
+
+        .userContextMenu {
+            position: absolute;
+            display: none;
+            z-index: 2;
+            cursor: pointer;
+
+            &.open{
+                display: inline-block;
+            }
+
+            .contextMenuBody {
+                position: relative;
+                top: 27px;
+                left: -6px;
+                z-index: 3;
+                border-radius: 2px;
+                border: 1px solid black;
+                height: 56px;
+                width: 150px;
+                background-color: whitesmoke;
+
+                    div {
+                        height: 28px;
+                        padding-top: 6px;
+                        text-align: center;
+                        box-sizing: border-box;
+
+                        &:hover{
+                            background-color: #69e06e;
+                        }
+                    }
+            }
+        }
+    }
+}
