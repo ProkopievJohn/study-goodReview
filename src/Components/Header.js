@@ -5,7 +5,7 @@ class Header extends React.Component{
     render(){
         const {account} = this.props;
         return(
-            <div>
+            <div className="headerBody">
                 <div className="logoBlock">
                     <a href="/" title="Main Page">
                         <img src="/devico_001.svg" alt="logo"/>
