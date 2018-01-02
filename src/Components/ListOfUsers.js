@@ -1,26 +1,34 @@
 import React from 'react';
 
-class User extends React.Component{
-
-    handelUserSelect = (event, userId) => {
-        const {onShowUserProfile} = this.props;
-        const userElement = event.target.closest(".user");
-        document.querySelectorAll(".user").forEach(elem => {
-            if (elem !== userElement) elem.classList.remove("active");
-        })
-        if (!userElement.classList.contains("active")){
-            userElement.classList.add("active");
-            onShowUserProfile(userId);
-        }
-    }
-
+class ContextMenu extends React.Component{
     render(){
-        const {user, onUserContextMenu, contextMenuUserId, onOpenReviewFrom, onUserDelete} = this.props;
+        const {userId, activeContextMenu, onOpenReviewFrom, onUserDelete} = this.props;
+        return(
+            <div className={activeContextMenu === userId ? "userContextMenu open" : "userContextMenu"}>
+                <div className="contextMenuBody">
+                    <div onClick={() => onOpenReviewFrom(userId)}>Add review</div>
+                    <div onClick={() => onUserDelete(userId)}>Delete user</div>
+                </div>
+            </div>
+        );
+    }
+}
+
+class User extends React.Component{
+    render(){
+        const {
+            user,
+            onUserContextMenu,
+            activeContextMenu,
+            activeUserId,
+            onShowUserProfile,
+            onOpenReviewFrom,
+            onUserDelete} = this.props;
 
         return(
             <li>
                 <div className="userListItem">
-                    <span className="user" onClick={(event) => this.handelUserSelect(event, user.id)}>
+                    <span className={activeUserId !== user.id ? "user" : "user active"} onClick={() => onShowUserProfile(user.id)}>
                         <span className="userIcon" >
                             <i className="material-icons">person</i>
                         </span>
@@ -28,16 +36,16 @@ class User extends React.Component{
                             {user.firstName} {user.lastName}
                         </span>
                     </span>
-                    <span className={contextMenuUserId === user.id ? "userContextMenuBtn active" : "userContextMenuBtn"} onClick={() => onUserContextMenu(user.id)}>
+                    <span className={activeContextMenu === user.id ? "userContextMenuBtn active" : "userContextMenuBtn"} onClick={() => onUserContextMenu(user.id)}>
                         <i className="material-icons">more_vert</i>
                     </span>
                 </div>
-                <div className={contextMenuUserId === user.id ? "userContextMenu open" : "userContextMenu"}>
-                    <div className="contextMenuBody">
-                        <div onClick={() => onOpenReviewFrom(user.id)}>Add review</div>
-                        <div onClick={() => onUserDelete(user.id)}>Delete user</div>
-                    </div>
-                </div>
+                <ContextMenu
+                    userId={user.id}
+                    activeContextMenu={activeContextMenu}
+                    onOpenReviewFrom={onOpenReviewFrom}
+                    onUserDelete={onUserDelete}
+                />
             </li>
         )
     }
@@ -45,36 +53,61 @@ class User extends React.Component{
 
 class ListOfUsers extends React.Component{
     state = {
-        contextMenuUserId: null
+        activeContextMenu: null,
+        activeUserId: null,
     };
+
+    closeContexMenu = () => {
+        this.setState({activeContextMenu: null});
+        document.removeEventListener("click", this.handlerClickOut, true);
+    }
 
     handlerClickOut = (event) => {
         if (event.target.closest(".userContextMenu") === null) {
-            this.setState({contextMenuUserId: null});
-            document.removeEventListener("click", this.handlerClickOut);
+            event.stopImmediatePropagation();
+            this.closeContexMenu();
         }
     }
 
     handleUserContextMenu = (userId) =>{
-        const {contextMenuUserId} = this.state;
-        const resId = userId === contextMenuUserId ? null : userId;
-        resId !== null && document.addEventListener("click", this.handlerClickOut);
-        this.setState({contextMenuUserId : resId});
+        const {activeContextMenu} = this.state;
+        const resId = userId === activeContextMenu ? null : userId;
+        resId !== null && document.addEventListener("click", this.handlerClickOut, true);
+        this.setState({activeContextMenu : resId});
+    }
+
+    handleOpenReviewFrom = (userId) => {
+        const {onOpenReviewFrom} = this.props;
+        this.closeContexMenu();
+        onOpenReviewFrom(userId);
+    }
+
+    handleUserDelete = (userId) => {
+        const {onUserDelete} = this.props;
+        this.closeContexMenu();
+        onUserDelete(userId);
+    }
+
+    handleShowUserProfile = (userId) => {
+        const {onShowUserProfile} = this.props;
+        this.setState({activeUserId: userId});
+        onShowUserProfile(userId);
     }
 
     render(){
-        const {users, onOpenUserForm, onShowUserProfile, onOpenReviewFrom, onUserDelete} = this.props;
-        const {contextMenuUserId} = this.state;
+        const {users, onOpenUserForm} = this.props;
+        const {activeContextMenu, activeUserId} = this.state;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin)
                 return <User
                             key={user.id}
                             user={user}
-                            contextMenuUserId={contextMenuUserId}
-                            onShowUserProfile={onShowUserProfile}
+                            activeContextMenu={activeContextMenu}
+                            activeUserId={activeUserId}
+                            onShowUserProfile={this.handleShowUserProfile}
                             onUserContextMenu={this.handleUserContextMenu}
-                            onOpenReviewFrom={onOpenReviewFrom}
-                            onUserDelete={onUserDelete}
+                            onOpenReviewFrom={this.handleOpenReviewFrom}
+                            onUserDelete={this.handleUserDelete}
                         />
             return false;
         })
