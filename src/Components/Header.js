@@ -1,16 +1,14 @@
 import React from 'react';
 
 class Header extends React.Component{
-    redirectToMainPage = () => {
-        window.location = MAIN_PAGE_URL;
-    }
-
     render(){
         const {account} = this.props;
         return(
             <div>
-                <span className="logo" onClick={this.redirectToMainPage}>
-                    <img src="/devico_001.svg" alt="logo"/>
+                <span className="logo">
+                    <a href="/" title="Main Page">
+                        <img src="/devico_001.svg" alt="logo"/>
+                    </a>
                 </span>
                 <span className="accountBlock">
                     <span className="accountName">
