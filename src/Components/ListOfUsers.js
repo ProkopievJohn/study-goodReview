@@ -1,4 +1,5 @@
 import React from 'react';
+import './ListOfUsers.scss';
 
 class ContextMenu extends React.Component{
     render(){
