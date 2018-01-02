@@ -5,7 +5,7 @@ class User extends React.Component{
     handelUserSelect = (event, userId) => {
         const {onShowUserProfile} = this.props;
         const userElement = event.target.closest(".user");
-        document.querySelectorAll(".user").forEach((elem) => {
+        document.querySelectorAll(".user").forEach(elem => {
             if (elem !== userElement) elem.classList.remove("active");
         })
         if (!userElement.classList.contains("active")){
@@ -15,7 +15,7 @@ class User extends React.Component{
     }
 
     render(){
-        const {user, onUserContextMenu, contextMenuUserId, onAddReview, onUserDelete} = this.props;
+        const {user, onUserContextMenu, contextMenuUserId, onOpenReviewFrom, onUserDelete} = this.props;
 
         return(
             <li>
@@ -34,7 +34,7 @@ class User extends React.Component{
                 </div>
                 <div className={contextMenuUserId === user.id ? "userContextMenu open" : "userContextMenu"}>
                     <div className="contextMenuBody">
-                        <div onClick={() => onAddReview(user.id)}>Add review</div>
+                        <div onClick={() => onOpenReviewFrom(user.id)}>Add review</div>
                         <div onClick={() => onUserDelete(user.id)}>Delete user</div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ class ListOfUsers extends React.Component{
     };
 
     handlerClickOut = (event) => {
-        if (event.target.closest(".userContextMenuBtn") === null) {
+        if (event.target.closest(".userContextMenu") === null) {
             this.setState({contextMenuUserId: null});
             document.removeEventListener("click", this.handlerClickOut);
         }
@@ -63,7 +63,7 @@ class ListOfUsers extends React.Component{
     }
 
     render(){
-        const {users, onOpenUserForm, onShowUserProfile, onAddReview, onUserDelete} = this.props;
+        const {users, onOpenUserForm, onShowUserProfile, onOpenReviewFrom, onUserDelete} = this.props;
         const {contextMenuUserId} = this.state;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin)
@@ -73,9 +73,10 @@ class ListOfUsers extends React.Component{
                             contextMenuUserId={contextMenuUserId}
                             onShowUserProfile={onShowUserProfile}
                             onUserContextMenu={this.handleUserContextMenu}
-                            onAddReview={onAddReview}
+                            onOpenReviewFrom={onOpenReviewFrom}
                             onUserDelete={onUserDelete}
                         />
+            return false;
         })
         return(
             <div>
