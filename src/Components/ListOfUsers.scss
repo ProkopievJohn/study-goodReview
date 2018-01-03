@@ -1,4 +1,4 @@
-.userListBlock {
+.listOfUsersBlock {
     background-color: whitesmoke;
     box-sizing: border-box;
     display: block;
@@ -63,52 +63,55 @@
                 }
             }
 
-            .userContextMenuBtn {
+            .contextMenuBlock{
                 width: 10%;
-                cursor: pointer;
-                box-sizing: border-box;
-                display: inline-flex;
-                align-items: center;
-                color: #2b607b;
-                border: 2px solid rgba(0, 0, 0, 0);
 
-                &.active, &:hover{
-                    border: 2px solid #bbb;
-                    border-radius: 2px;
-                }
-            }
-        }
-
-        .userContextMenu {
-            position: absolute;
-            display: none;
-            z-index: 2;
-            cursor: pointer;
-
-            &.open{
-                display: inline-block;
-            }
-
-            .contextMenuBody {
-                background-color: whitesmoke;
-                border: 1px solid #bbb;
-                border-radius: 2px;
-                color: #2b607b;
-                position: relative;
-                left: -6px;
-                top: 27px;
-                height: 56px;
-                width: 150px;
-                z-index: 3;
-
-                div {
-                    height: 28px;
-                    padding-top: 6px;
-                    text-align: center;
+                .contextMenuBtn {
+                    cursor: pointer;
                     box-sizing: border-box;
+                    display: inline-flex;
+                    align-items: center;
+                    color: #2b607b;
+                    border: 2px solid rgba(0, 0, 0, 0);
 
-                    &:hover{
-                        background-color: #69e06e;
+                    &.active, &:hover{
+                        border: 2px solid #bbb;
+                        border-radius: 2px;
+                    }
+                }
+
+                .contextMenu {
+                    position: absolute;
+                    display: none;
+                    z-index: 2;
+                    cursor: pointer;
+
+                    &.open{
+                        display: inline-block;
+                    }
+
+                    .contextMenuBody {
+                        background-color: whitesmoke;
+                        border: 1px solid #bbb;
+                        border-radius: 2px;
+                        color: #2b607b;
+                        position: relative;
+                        left: -6px;
+                        top: 27px;
+                        height: 56px;
+                        width: 150px;
+                        z-index: 3;
+
+                        div {
+                            height: 28px;
+                            padding-top: 6px;
+                            text-align: center;
+                            box-sizing: border-box;
+
+                            &:hover{
+                                background-color: #69e06e;
+                            }
+                        }
                     }
                 }
             }
