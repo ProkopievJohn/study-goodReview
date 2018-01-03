@@ -1,5 +1,6 @@
 import React from 'react';
 import User from './User'
+import ContextMenu from './ContextMenu'
 
 import './ListOfUsers.scss';
 
@@ -9,34 +10,32 @@ class ListOfUsers extends React.Component{
         activeUserId: null,
     };
 
-    closeContexMenu = () => {
+    closeContextMenu = () => {
         this.setState({activeContextMenu: null});
         document.removeEventListener("click", this.handlerClickOut, true);
     }
 
     handlerClickOut = (event) => {
-        if (event.target.closest(".userContextMenu") === null) {
+        if (event.target.closest(".contextMenu") === null) {
             event.stopImmediatePropagation();
-            this.closeContexMenu();
+            this.closeContextMenu();
         }
     }
 
-    handleUserContextMenu = (userId) =>{
-        const {activeContextMenu} = this.state;
-        const resId = userId === activeContextMenu ? null : userId;
-        resId !== null && document.addEventListener("click", this.handlerClickOut, true);
-        this.setState({activeContextMenu : resId});
+    handleContextMenu = (userId) =>{
+        document.addEventListener("click", this.handlerClickOut, true);
+        this.setState({activeContextMenu : userId});
     }
 
     handleOpenReviewFrom = (userId) => {
         const {onOpenReviewFrom} = this.props;
-        this.closeContexMenu();
+        this.closeContextMenu();
         onOpenReviewFrom(userId);
     }
 
     handleUserDelete = (userId) => {
         const {onUserDelete} = this.props;
-        this.closeContexMenu();
+        this.closeContextMenu();
         onUserDelete(userId);
     }
 
@@ -51,16 +50,22 @@ class ListOfUsers extends React.Component{
         const {activeContextMenu, activeUserId} = this.state;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin)
-                return <User
-                            key={user.id}
-                            user={user}
-                            activeContextMenu={activeContextMenu}
-                            activeUserId={activeUserId}
-                            onShowUserProfile={this.handleShowUserProfile}
-                            onUserContextMenu={this.handleUserContextMenu}
-                            onOpenReviewFrom={this.handleOpenReviewFrom}
-                            onUserDelete={this.handleUserDelete}
-                        />
+                return <li key={user.id}>
+                            <div className="userListItem">
+                                <User
+                                    user={user}
+                                    activeUserId={activeUserId}
+                                    onShowUserProfile={this.handleShowUserProfile}
+                                />
+                                <ContextMenu
+                                    userId={user.id}
+                                    activeContextMenu={activeContextMenu}
+                                    onContextMenu={this.handleContextMenu}
+                                    onOpenReviewFrom={this.handleOpenReviewFrom}
+                                    onUserDelete={this.handleUserDelete}
+                                />
+                            </div>
+                        </li>
             return false;
         })
         return(
