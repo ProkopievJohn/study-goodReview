@@ -49,9 +49,9 @@ class ListOfUsers extends React.Component{
         const {users, onOpenUserForm} = this.props;
         const {activeContextMenu, activeUserId} = this.state;
         const listOfUsers = users.map(user => {
-            if (!user.isAdmin)
-                return <li key={user.id}>
-                            <div className="userListItem">
+            if (!user.isAdmin){
+                return (<li key={user.id}>
+                            <div className="usersListItem">
                                 <User
                                     user={user}
                                     activeUserId={activeUserId}
@@ -65,9 +65,10 @@ class ListOfUsers extends React.Component{
                                     onUserDelete={this.handleUserDelete}
                                 />
                             </div>
-                        </li>
+                        </li>)
+            }
             return false;
-        })
+        });
         return(
             <div>
                 <button className="simpleButton addUserBtn" onClick={onOpenUserForm}>Add user</button>
