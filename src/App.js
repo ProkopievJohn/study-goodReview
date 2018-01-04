@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
+import ListOfUsers from './Components/ListOfUsers';
 import PopupsBlock from './Components/PopupsBlock';
 import './App.scss';
 
@@ -26,13 +27,40 @@ class App extends Component {
     popups: []
   };
 
+  handleOpenUserForm = () => {
+  }
+
+  handleReviewCreated = (review) => {
+  }
+
+  handleDeleteUser = (userId) => {
+  }
+
+  handelShowUserProfile = (userId) => {
+  }
+
+  handlePopupClose = (id) => {
+    let {popups} = this.state;
+    popups = popups.filter(popup => popup.id !== id);
+    this.setState({popups});
+  }
+
   render() {
-    const {popups} = this.state;
+    const {users, popups} = this.state;
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
       <div className="App">
         <Header account={admin}/>
+        <div className="content">
+          <ListOfUsers
+            users={users}
+            onOpenUserForm={this.handleOpenUserForm}
+            onShowUserProfile={this.handelShowUserProfile}
+            onOpenReviewFrom={this.handleOpenReviewForm}
+            onUserDelete={this.handleDeleteUser}
+          />
+        </div>
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>
       </div>
     );

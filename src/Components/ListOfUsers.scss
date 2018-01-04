@@ -23,8 +23,14 @@
             height: 40px;
             width: 100%;
             margin: 2px 0;
+            color: deepskyblue;
 
-            span{
+            &.active{
+                background-color: #14adc4;
+                color: white;
+            }
+
+            >div{
                 box-sizing: border-box;
                 height: 40px;
             }
@@ -37,21 +43,14 @@
                 cursor: pointer;
                 border: 2px solid rgba(0, 0, 0, 0);
 
-                &.active{
-                    border: 2px solid #bbb;
-                    border-radius: 2px;
-                }
-
                 .userIcon{
                     width: 15%;
                     display: inline-flex;
                     align-items: center;
-                    color: deepskyblue;
                 }
 
                 .userName {
                     align-items: center;
-                    color: #2b607b;
                     font-size: 20px;
                     overflow: hidden;
                     text-align: left;
@@ -65,16 +64,16 @@
 
             .contextMenuBlock{
                 width: 10%;
+                display: inline-flex;
+                align-items: center;
 
                 .contextMenuBtn {
                     cursor: pointer;
                     box-sizing: border-box;
-                    display: inline-flex;
-                    align-items: center;
-                    color: #2b607b;
                     border: 2px solid rgba(0, 0, 0, 0);
+                    display: flex;
 
-                    &.active, &:hover{
+                    &:hover{
                         border: 2px solid #bbb;
                         border-radius: 2px;
                     }
@@ -96,13 +95,12 @@
                         border-radius: 2px;
                         color: #2b607b;
                         position: relative;
-                        left: -6px;
-                        top: 27px;
+                        top: 15px;
                         height: 56px;
                         width: 150px;
                         z-index: 3;
 
-                        div {
+                        >div {
                             height: 28px;
                             padding-top: 6px;
                             text-align: center;
