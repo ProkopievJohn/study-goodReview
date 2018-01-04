@@ -1,4 +1,5 @@
 import React from 'react';
+import './PopupsBlock.scss';
 
 class Popup extends React.Component {
     state = {

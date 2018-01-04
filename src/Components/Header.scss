@@ -7,32 +7,28 @@
     position: fixed;
     width: 100%;
     z-index: 10;
+    display: flex;
+    justify-content: space-between;
 
-    .headerBody{
-        display: flex;
-        justify-content: space-between;
-
-        .logoBlock {
-            cursor: pointer;
-            img {
-                height: 46px;
-            }
-        }
-
-        .accountBlock{
-            display: flex;
-            align-items: center;
-            color: white;
-            cursor: pointer;
-
-            .accountName{
-                font-size: 20px;
-            }
-
-            .accountAvatar i {
-                font-size: 46px;
-            }
+    .logoBlock {
+        cursor: pointer;
+        img {
+            height: 46px;
         }
     }
 
+    .accountBlock{
+        display: flex;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+
+        .accountName{
+            font-size: 20px;
+        }
+
+        .accountAvatar i {
+            font-size: 46px;
+        }
+    }
 }
