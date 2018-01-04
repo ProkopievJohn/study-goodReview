@@ -1,4 +1,9 @@
 .App {
     text-align: center;
     min-height: 100vh;
+
+    .content{
+        display: flex;
+        padding-top: 50px;
+    }
 }

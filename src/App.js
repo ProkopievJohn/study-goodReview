@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
+import ListOfUsers from './Components/ListOfUsers';
 import PopupsBlock from './Components/PopupsBlock';
 import './App.scss';
 
@@ -23,16 +24,44 @@ class App extends Component {
   state = {
     users: usersArr,
     reviews: reviewsArr,
+    selectedUserId: null,
     popups: []
   };
 
+  handlePopupClose = (id) => {
+    let {popups} = this.state;
+    popups = popups.filter(popup => popup.id !== id);
+    this.setState({popups});
+  }
+
+  handleUserSelect = (userId) => {
+    this.setState({selectedUserId: userId})
+  }
+
+  handleDeleteUser = (userId) => {
+    let {reviews, users, selectedUserId, popups} = this.state;
+    reviews = reviews.filter(rev => rev.userId !== userId);
+    users = users.filter(usr => usr.id !== userId);
+    selectedUserId = selectedUserId ===  userId ? null : selectedUserId;
+    popups.push({message: "User deleted", id: popupId++});
+    this.setState({popups, users, reviews, selectedUserId});
+  }
+
   render() {
-    const {popups} = this.state;
+    const {users, selectedUserId, popups} = this.state;
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
       <div className="App">
         <Header account={admin}/>
+        <div className="content">
+          <ListOfUsers
+            users={users}
+            selectedUserId={selectedUserId}
+            onUserSelect={this.handleUserSelect}
+            onUserDelete={this.handleDeleteUser}
+          />
+        </div>
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>
       </div>
     );
