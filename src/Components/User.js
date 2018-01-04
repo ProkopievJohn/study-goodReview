@@ -1,5 +1,5 @@
 import React from 'react';
-import ContextMenu from './ContextMenu';
+import ContextMenuBlock from './ContextMenuBlock';
 
 class User extends React.Component{
     state = {showContextMenu: false};
@@ -42,7 +42,7 @@ class User extends React.Component{
                             {user.firstName} {user.lastName}
                         </span>
                     </div>
-                    <ContextMenu
+                    <ContextMenuBlock
                         userId={user.id}
                         showContextMenu={showContextMenu}
                         onContextMenu={this.handleContextMenu}

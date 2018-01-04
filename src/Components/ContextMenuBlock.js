@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ContextMenu extends React.Component{
+class ContextMenuBlock extends React.Component{
     render(){
         const {userId, showContextMenu, onContextMenu, onUserDelete} = this.props;
         return(
@@ -19,4 +19,4 @@ class ContextMenu extends React.Component{
     }
 }
 
-export default ContextMenu;
+export default ContextMenuBlock;
