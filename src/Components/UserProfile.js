@@ -11,20 +11,20 @@ class UserProfile extends React.Component{
         })
         const reviewsList = reviews.map(review => <Review key={review.id} review={review} onReviewDelete={onReviewDelete}/>);
         return(
-            <div>
+            <div className="userProfile">
                 <div className="userInfoBlock">
                     <div className="userAvatar">
                         <i className="material-icons">account_box</i>
                     </div>
                     <div className="userInfo">
                         <div className="userFirstName">
-                            <span>Name: </span><span>{user.firstName}</span>
+                            <span className="fieldLable">Name: </span><span className="fieldText">{user.firstName}</span>
                         </div>
                         <div className="userLastName">
-                            <span>Last name: </span><span>{user.lastName}</span>
+                            <span className="fieldLable">Last name: </span><span className="fieldText">{user.lastName}</span>
                         </div>
                         <div className="userSkills">
-                            <span>Skills: </span><span>{user.skills.join(", ")}</span>
+                            <span className="fieldLable">Skills: </span><span className="fieldText">{user.skills.join(", ")}</span>
                         </div>
                     </div>
                 </div>

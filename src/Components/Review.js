@@ -4,12 +4,12 @@ class Review extends React.Component{
     render(){
         const {review, onReviewDelete} = this.props
         return(
-            <div className="review">
+            <div className={review.isAproved ? "review" : "review notAproved"}>
                 <div className="reviewHeader">
-                    <span className="reviewDate">{new Date(review.date).toLocaleString()}</span>
-                    <span className="reviewDeleteBtn" onClick={() => onReviewDelete(review.id)}>
+                    <div className="reviewDate">{new Date(review.date).toLocaleString()}</div>
+                    <div className="reviewDeleteBtn" onClick={() => onReviewDelete(review.id)}>
                         <i className="material-icons">close</i>
-                    </span>
+                    </div>
                 </div>
                 <div className="reviewText">
                     {review.reviewText}
