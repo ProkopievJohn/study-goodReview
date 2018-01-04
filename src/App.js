@@ -27,22 +27,18 @@ class App extends Component {
     popups: []
   };
 
-  handleOpenUserForm = () => {
-  }
-
-  handleReviewCreated = (review) => {
-  }
-
-  handleDeleteUser = (userId) => {
-  }
-
-  handelShowUserProfile = (userId) => {
-  }
-
   handlePopupClose = (id) => {
     let {popups} = this.state;
     popups = popups.filter(popup => popup.id !== id);
     this.setState({popups});
+  }
+
+  handleDeleteUser = (userId) => {
+    let {reviews, users, popups} = this.state;
+    reviews = reviews.filter(rev => rev.userId !== userId);
+    users = users.filter(usr => usr.id !== userId);
+    popups.push({message: "User deleted", id: popupId++});
+    this.setState({popups, users, reviews});
   }
 
   render() {
@@ -55,9 +51,6 @@ class App extends Component {
         <div className="content">
           <ListOfUsers
             users={users}
-            onOpenUserForm={this.handleOpenUserForm}
-            onShowUserProfile={this.handelShowUserProfile}
-            onOpenReviewFrom={this.handleOpenReviewForm}
             onUserDelete={this.handleDeleteUser}
           />
         </div>
