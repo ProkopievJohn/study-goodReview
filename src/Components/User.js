@@ -19,12 +19,12 @@ class User extends React.Component{
     }
 
     render(){
-        const {user, activeUserId, onSelectUser} = this.props;
+        const {user, selectedUserId, onSelectUser} = this.props;
         const {showContextMenu} = this.state;
 
         return(
             <li>
-                <div className={activeUserId !== user.id ? "usersListItem" : "usersListItem active"}>
+                <div className={selectedUserId !== user.id ? "usersListItem" : "usersListItem active"}>
                     <div className="user" onClick={() => onSelectUser(user.id)}>
                         <span className="userIcon" >
                             <i className="material-icons">person</i>

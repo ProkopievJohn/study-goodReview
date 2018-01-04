@@ -5,14 +5,14 @@ import './ListOfUsers.scss';
 
 class ListOfUsers extends React.Component{
     render(){
-        const {users, activeUserId, onUserSelect, onUserDelete} = this.props;
+        const {users, selectedUserId, onUserSelect, onUserDelete} = this.props;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin){
                 return (
                     <User
                         key={user.id}
                         user={user}
-                        activeUserId={activeUserId}
+                        selectedUserId={selectedUserId}
                         onSelectUser={onUserSelect}
                         onUserDelete={onUserDelete}
                     />)

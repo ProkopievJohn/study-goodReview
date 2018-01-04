@@ -24,7 +24,7 @@ class App extends Component {
   state = {
     users: usersArr,
     reviews: reviewsArr,
-    activeUserId: null,
+    selectedUserId: null,
     popups: []
   };
 
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   handleUserSelect = (userId) => {
-    this.setState({activeUserId: userId})
+    this.setState({selectedUserId: userId})
   }
 
   handleDeleteUser = (userId) => {
@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   render() {
-    const {users, activeUserId, popups} = this.state;
+    const {users, selectedUserId, popups} = this.state;
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
@@ -56,7 +56,7 @@ class App extends Component {
         <div className="content">
           <ListOfUsers
             users={users}
-            activeUserId={activeUserId}
+            selectedUserId={selectedUserId}
             onUserSelect={this.handleUserSelect}
             onUserDelete={this.handleDeleteUser}
           />
