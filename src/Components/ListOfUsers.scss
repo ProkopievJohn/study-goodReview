@@ -85,6 +85,11 @@
 
                 .contextMenu {
                     position: absolute;
+                    display: none;
+
+                    &.open{
+                        display: inline-block;
+                    }
 
                     .contextMenuBody {
                         background-color: whitesmoke;
