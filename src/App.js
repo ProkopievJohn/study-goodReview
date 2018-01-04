@@ -27,7 +27,6 @@ class App extends Component {
     reviews: reviewsArr,
     selectedUserId: null,
     showProfile: true,
-    profileUser: usersArr[1],
     popups: []
   };
 
@@ -74,7 +73,7 @@ class App extends Component {
           {selectedUserId !== null &&
             <UserProfile
               reviews={reviews.filter(r => r.userId === selectedUserId)}
-              user={users.find(u => u.Id === selectedUserId)}
+              user={users.find(u => u.id === selectedUserId)}
               onReviewDelete={this.handleDeleteReview}
             />
           }
