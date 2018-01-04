@@ -6,18 +6,9 @@ class User extends React.Component{
 
     closeContextMenu = () => {
         this.setState({showContextMenu: false});
-        document.removeEventListener("click", this.handlerClickOut, true);
     }
 
-    handlerClickOut = (event) => {
-        if (event.target.closest(".contextMenu") === null) {
-            event.stopImmediatePropagation();
-            this.closeContextMenu();
-        }
-    }
-
-    handleContextMenu = () =>{
-        document.addEventListener("click", this.handlerClickOut, true);
+    handleOpenContextMenu = () =>{
         this.setState({showContextMenu : true});
     }
 
@@ -45,7 +36,8 @@ class User extends React.Component{
                     <ContextMenuBlock
                         userId={user.id}
                         showContextMenu={showContextMenu}
-                        onContextMenu={this.handleContextMenu}
+                        onContextMenuBtn={this.handleOpenContextMenu}
+                        onContextClose={this.closeContextMenu}
                         onUserDelete={this.handleUserDelete}
                     />
                 </div>

@@ -85,31 +85,19 @@
 
                 .contextMenu {
                     position: absolute;
-                    display: none;
-                    z-index: 2;
-                    cursor: pointer;
-
-                    &.open{
-                        display: inline-block;
-
-                        .contextMenuBody{
-                            height: 56px;
-                            width: 150px;
-                        }
-                    }
 
                     .contextMenuBody {
                         background-color: whitesmoke;
                         border: 1px solid #bbb;
                         border-radius: 2px;
+                        display: inline-block;
+                        height: 56px;
+                        width: 150px;
                         color: #2b607b;
                         position: relative;
                         top: 15px;
-                        z-index: 3;
-                        -webkit-transition: height 0.75s ease-out;
-                        -moz-transition: height 0.75s ease-out;
-                        -o-transition: height 0.75s ease-out;
-                        transition: height 0.75s ease-out;
+                        z-index: 21;
+                        cursor: pointer;
 
                         >div {
                             height: 28px;
@@ -121,6 +109,15 @@
                                 background-color: #69e06e;
                             }
                         }
+                    }
+
+                    .contextMenuOverlay{
+                        position: fixed;
+                        z-index: 20;
+                        height: 100vh;
+                        width: 100vw;
+                        top: 0;
+                        left: 0;
                     }
                 }
             }

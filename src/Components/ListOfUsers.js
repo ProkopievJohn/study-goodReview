@@ -4,17 +4,8 @@ import User from './User';
 import './ListOfUsers.scss';
 
 class ListOfUsers extends React.Component{
-    state = {
-        activeUserId: null,
-    };
-
-    handleSelectUser = (userId) => {
-        this.setState({activeUserId: userId});
-    }
-
     render(){
-        const {users, onUserDelete} = this.props;
-        const {activeUserId} = this.state;
+        const {users, activeUserId, onUserSelect, onUserDelete} = this.props;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin){
                 return (
@@ -22,7 +13,7 @@ class ListOfUsers extends React.Component{
                         key={user.id}
                         user={user}
                         activeUserId={activeUserId}
-                        onSelectUser={this.handleSelectUser}
+                        onSelectUser={onUserSelect}
                         onUserDelete={onUserDelete}
                     />)
             }
