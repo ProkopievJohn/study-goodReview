@@ -1,6 +1,5 @@
 import React from 'react';
-import User from './User'
-import ContextMenu from './ContextMenu'
+import User from './User';
 
 import './ListOfUsers.scss';
 
@@ -55,14 +54,8 @@ class ListOfUsers extends React.Component{
                                 <User
                                     user={user}
                                     activeUserId={activeUserId}
-                                    onShowUserProfile={this.handleShowUserProfile}
-                                />
-                                <ContextMenu
-                                    userId={user.id}
                                     activeContextMenu={activeContextMenu}
-                                    onContextMenu={this.handleContextMenu}
-                                    onOpenReviewFrom={this.handleOpenReviewFrom}
-                                    onUserDelete={this.handleUserDelete}
+                                    onShowUserProfile={this.handleShowUserProfile}
                                 />
                             </div>
                         </li>)
