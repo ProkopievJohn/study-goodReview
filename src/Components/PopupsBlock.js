@@ -1,4 +1,5 @@
 import React from 'react';
+import './PopupsBlock.scss';
 
 class Popup extends React.Component {
     state = {
@@ -35,7 +36,7 @@ class PopupsBlock extends React.Component {
         );
 
         return (
-            <div id="popupsBlock">
+            <div className="popupsBlock">
                 {listOfPopups}
             </div>
         );

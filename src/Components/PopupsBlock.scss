@@ -1,0 +1,37 @@
+@keyframes rightAppear {
+    from {right: -400px;}
+    to {right: 0;}
+}
+
+@keyframes erase {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.popupsBlock{
+    background-color: #1a1313;
+    border-radius: 4px;
+    position: fixed;
+    right: 10px;
+    top: 150px;
+    width: 250px;
+
+    .popup{
+        box-sizing: border-box;
+        color: mintcream;
+        height: 40px;
+        margin-bottom: 10px;
+        position: relative;
+        padding-top: 15px;
+        text-align: center;
+        width: 100%;
+        z-index: 3;
+        animation: rightAppear;
+        animation-duration: 200ms;
+    }
+
+    .popup.close{
+        animation: erase;
+        animation-duration: 1000ms;
+    }
+}
