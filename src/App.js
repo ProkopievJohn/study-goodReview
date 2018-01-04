@@ -12,14 +12,12 @@ const usersArr = [
 ]
 
 const reviewsArr = [
-  {reviewText: 'test review 1', id: 1, userId:usersArr[0].id, date: Date.now() - 100*60*1000},
-  {reviewText: 'test review 2', id: 2, userId:usersArr[0].id, date: Date.now()},
-  {reviewText: 'test review 3', id: 3, userId:usersArr[1].id, date: Date.now() - 100*60*1000},
-  {reviewText: 'test review 4', id: 4, userId:usersArr[1].id, date: Date.now()},
-  {reviewText: 'default review', id: 5, userId:usersArr[2].id, date: Date.now()}
+  {reviewText: 'test review 1', id: 1, userId:usersArr[0].id, isAproved: true, date: Date.now() - 100*60*1000},
+  {reviewText: 'test review 2', id: 2, userId:usersArr[0].id, isAproved: true, date: Date.now()},
+  {reviewText: 'test review 3', id: 3, userId:usersArr[1].id, isAproved: true, date: Date.now() - 100*60*1000},
+  {reviewText: 'test review 4', id: 4, userId:usersArr[1].id, isAproved: true, date: Date.now()},
+  {reviewText: 'default review', id: 5, userId:usersArr[2].id, isAproved: true, date: Date.now()}
 ]
-
-const admin = usersArr.find(user => user.isAdmin === true);
 
 class App extends Component {
   state = {
@@ -30,6 +28,7 @@ class App extends Component {
 
   render() {
     const {popups} = this.state;
+    const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
       <div className="App">

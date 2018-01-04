@@ -36,7 +36,7 @@ class PopupsBlock extends React.Component {
         );
 
         return (
-            <div id="popupsBlock">
+            <div className="popupsBlock">
                 {listOfPopups}
             </div>
         );
