@@ -26,16 +26,8 @@ class App extends Component {
     users: usersArr,
     reviews: reviewsArr,
     selectedUserId: null,
-    showProfile: true,
     popups: []
   };
-
-  handleDeleteReview = (reviewId) => {
-    let {reviews, popups} = this.state;
-    reviews = reviews.filter(rev => rev.id !== reviewId);
-    popups.push({message: "Review deleted", id: popupId++});
-    this.setState({reviews, popups});
-  }
 
   handlePopupClose = (id) => {
     let {popups} = this.state;
@@ -54,6 +46,13 @@ class App extends Component {
     selectedUserId = selectedUserId ===  userId ? null : selectedUserId;
     popups.push({message: "User deleted", id: popupId++});
     this.setState({popups, users, reviews, selectedUserId});
+  }
+
+  handleDeleteReview = (reviewId) => {
+    let {reviews, popups} = this.state;
+    reviews = reviews.filter(rev => rev.id !== reviewId);
+    popups.push({message: "Review deleted", id: popupId++});
+    this.setState({reviews, popups});
   }
 
   render() {
