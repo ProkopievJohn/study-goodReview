@@ -24,6 +24,10 @@
             width: 100%;
             margin: 2px 0;
             color: deepskyblue;
+            -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+            -moz-transition: background-color 0.5s ease, color 0.5s ease;
+            -o-transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
 
             &.active{
                 background-color: #14adc4;
@@ -87,6 +91,11 @@
 
                     &.open{
                         display: inline-block;
+
+                        .contextMenuBody{
+                            height: 56px;
+                            width: 150px;
+                        }
                     }
 
                     .contextMenuBody {
@@ -96,9 +105,11 @@
                         color: #2b607b;
                         position: relative;
                         top: 15px;
-                        height: 56px;
-                        width: 150px;
                         z-index: 3;
+                        -webkit-transition: height 0.75s ease-out;
+                        -moz-transition: height 0.75s ease-out;
+                        -o-transition: height 0.75s ease-out;
+                        transition: height 0.75s ease-out;
 
                         >div {
                             height: 28px;
