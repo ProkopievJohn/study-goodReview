@@ -39,11 +39,12 @@ class App extends Component {
   }
 
   handleDeleteUser = (userId) => {
-    let {reviews, users, popups} = this.state;
+    let {reviews, users, selectedUserId, popups} = this.state;
     reviews = reviews.filter(rev => rev.userId !== userId);
     users = users.filter(usr => usr.id !== userId);
+    selectedUserId = selectedUserId ===  userId ? null : selectedUserId;
     popups.push({message: "User deleted", id: popupId++});
-    this.setState({popups, users, reviews});
+    this.setState({popups, users, reviews, selectedUserId});
   }
 
   render() {
