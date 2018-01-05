@@ -10,6 +10,8 @@
         width: 100%;
         height: 260px;
         display: flex;
+        padding-left: 18px;
+        box-sizing: border-box;
 
         .userAvatar {
             width: 250px;
@@ -23,9 +25,10 @@
 
         .userInfo {
             height: 250px;
-            text-align: left;
-            padding: 25px;
+            display: flex;
+            flex-direction: column;
             box-sizing: border-box;
+            justify-content: center;
 
             >div {
                 height: 66px;
@@ -51,7 +54,7 @@
 
         .review{
             width: 90%;
-            min-height: 80px;
+            min-height: 75px;
             border: 2px solid #bbb;
             box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
             border-radius: 2px;
@@ -84,6 +87,7 @@
 
             .reviewText{
                 text-align: left;
+                padding-left: 10px;
             }
         }
     }
