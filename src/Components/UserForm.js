@@ -19,9 +19,9 @@ class UserForm extends React.Component {
         const {onUserFormSubmit} = this.props;
 
         const user = {
+            id: userId++,
             firstName,
             lastName,
-            id: userId++,
             isAdmin: false,
             skills
         }
@@ -67,8 +67,10 @@ class UserForm extends React.Component {
     addSkill = () => {
         let {skillsInput, skills} = this.state;
         skillsInput = skillsInput.trim();
-        const skillsCase = skills.map(skill => skill.toLowerCase());
-        if (skillsInput !== '' && !skillsCase.includes(skillsInput.toLowerCase())) skills.push(skillsInput);
+        const skillsLowerCase = skills.map(skill => skill.toLowerCase());
+        if (skillsInput !== '' && !skillsLowerCase.includes(skillsInput.toLowerCase())) {
+            skills.push(skillsInput);
+        }
         skillsInput = '';
         this.setState({skills, skillsInput});
     }
@@ -118,7 +120,7 @@ class UserForm extends React.Component {
                             onChange={this.handleInputChange}
                             onKeyPress={this.handleOnEnter}
                         />
-                        <button className="simpleButton skillsAdd" type="button" onClick={this.addSkill}>Add</button>
+                        <button children="Add" className="simpleButton skillsAdd" type="button" onClick={this.addSkill}/>
                         <div>
                             {skills.map((skill, indx) => {
                                 return (
@@ -130,9 +132,7 @@ class UserForm extends React.Component {
                         </div>
                     </div>
                 </div>
-                <button className="simpleButton" type="submit" disabled={disabled}>
-                    Add user
-                </button>
+                <button children="Add user" className="simpleButton" type="submit" disabled={disabled}/>
             </form>
         );
     }

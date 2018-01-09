@@ -13,15 +13,16 @@ class ReviewForm extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
         const {reviewText} = this.state;
-        const {onReviewCreate, userId} = this.props;
+        const {onReviewCreated, userId} = this.props;
         const review = {
                     id: reviewId++,
                     reviewText,
                     userId,
+                    isAproved: false,
                     date: Date.now()
                 };
         this.setState({reviewText: '', disabled: true})
-        onReviewCreate(review);
+        onReviewCreated(review);
     }
 
     handleChange = (event) => {
@@ -66,17 +67,13 @@ class ReviewForm extends React.Component{
                             onChange={this.handleChange}
                             placeholder="Review text"
                             name="reviewText"
+                            rows={4}
                             onBlur={this.handleBlur}
                         />
                         <span>{errors.reviewText && errors.reviewText.message}</span>
                     </div>
                 </div>
-                <button
-                    children="Add review"
-                    type="submit"
-                    className="simpleButton"
-                    disabled={disabled}
-                />
+                <button children="Add review" type="submit" className="simpleButton" disabled={disabled}/>
             </form>
         );
     }
