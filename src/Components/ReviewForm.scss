@@ -1,0 +1,43 @@
+#reviewForm{
+    > div > div{
+        margin-bottom: 10px;
+        height: 48px;
+    }
+
+    textarea{
+        box-sizing: border-box;
+        font-family: sans-serif;
+        font-size: 18px;
+        height: 36px;
+        resize: none;
+        padding-top: 8px
+    }
+
+    textarea::placeholder{
+        font-family: sans-serif;
+        font-size: 18px;
+    }
+
+    select {
+        font-family: sans-serif;
+        font-size: 18px;
+        height: 36px;
+    }
+
+    select, textarea{
+        border: none;
+        background-color: white;
+        border-bottom: 2px solid #6b6767;
+        display: block;
+        margin: 0 auto;
+        width: 180px;
+    }
+
+    .invalid{
+        color: red;
+
+        select, textarea{
+            border-bottom: 2px solid red;
+        }
+    }
+}

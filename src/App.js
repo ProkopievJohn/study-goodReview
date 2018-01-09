@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ListOfUsers from './Components/ListOfUsers';
+<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
 import UserProfile from './Components/UserProfile';
+=======
+// import UserProfile from './Components/UserProfile';
+>>>>>>> added Modal Window, User Form and Review Form components
 import PopupsBlock from './Components/PopupsBlock';
+import ModalWindow from './Components/ModalWindow';
+import UserForm from './Components/UserForm';
+import ReviewForm from './Components/ReviewForm';
 import './App.scss';
 
 var popupId = 1;
@@ -26,6 +33,7 @@ class App extends Component {
     users: usersArr,
     reviews: reviewsArr,
     selectedUserId: null,
+    showModalUserForm: false,
     popups: []
   };
 
@@ -36,7 +44,7 @@ class App extends Component {
   }
 
   handleUserSelect = (userId) => {
-    this.setState({selectedUserId: userId})
+    this.setState({selectedUserId: userId});
   }
 
   handleDeleteUser = (userId) => {
@@ -55,8 +63,50 @@ class App extends Component {
     this.setState({reviews, popups});
   }
 
+<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
   render() {
     const {reviews, users, selectedUserId, popups} = this.state;
+=======
+  handleOpenUserForm = () => {
+    this.setState({showModalUserForm: true})
+  }
+
+  handleCloseUserForm = () => {
+    this.setState({showModalUserForm: false})
+  }
+
+  handleUserFormSubmit = (user) => {
+    let {popups, users} = this.state;
+    users.push(user);
+    popups.push({message: "New user created", id: popupId++});
+    this.setState({showModalUserForm: false, popups, users});
+  }
+
+  handleOpenReviewForm = (userId) => {
+    this.setState({procedUserId: userId, showModalReviewForm: true})
+  }
+
+  handleCloseReviewForm = () => {
+    this.setState({showModalReviewForm: false})
+  }
+
+  handleReviewCreated = (review) => {
+    let {reviews, popups} = this.state;
+    reviews.push(review);
+    popups.push({message: "New review created", id: popupId++});
+    this.setState({reviews, popups, showModalReviewForm: false});
+  }
+
+  render() {
+    const {
+      reviews,
+      users,
+      selectedUserId,
+      popups,
+      showModalUserForm,
+      showModalReviewForm,
+      procedUserId} = this.state;
+>>>>>>> added Modal Window, User Form and Review Form components
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
@@ -68,15 +118,37 @@ class App extends Component {
             selectedUserId={selectedUserId}
             onUserSelect={this.handleUserSelect}
             onUserDelete={this.handleDeleteUser}
+            onReviewFormOpen={this.handleOpenReviewForm}
+            onNewUser={this.handleOpenUserForm}
           />
+<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
           {selectedUserId !== null &&
+=======
+          {/* {selectedUserId !== null &&
+>>>>>>> added Modal Window, User Form and Review Form components
             <UserProfile
               reviews={reviews.filter(r => r.userId === selectedUserId)}
               user={users.find(u => u.id === selectedUserId)}
               onReviewDelete={this.handleDeleteReview}
             />
+<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
           }
+=======
+          } */}
+>>>>>>> added Modal Window, User Form and Review Form components
         </div>
+        {showModalUserForm &&
+          <ModalWindow
+            onCloseModalWindow={this.handleCloseUserForm}
+            form={<UserForm onUserFormSubmit={this.handleUserFormSubmit}/>}
+          />
+        }
+        {showModalReviewForm &&
+           <ModalWindow
+            onCloseModalWindow={this.handleCloseReviewForm}
+            form={<ReviewForm userId={procedUserId} onReviewCreate={this.handleReviewCreated}/>}
+          />
+        }
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>
       </div>
     );

@@ -1,10 +1,10 @@
 import React from 'react';
+import './ReviewForm.scss';
 
 var reviewId = 6;
 
 class ReviewForm extends React.Component{
     state = {
-        selectedUser: '',
         reviewText: '',
         errors: {},
         disabled: true
@@ -12,15 +12,15 @@ class ReviewForm extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {reviewText, selectedUser} = this.state;
-        const {onReviewCreate} = this.props;
+        const {reviewText} = this.state;
+        const {onReviewCreate, userId} = this.props;
         const review = {
                     id: reviewId++,
                     reviewText,
-                    userId: parseInt(selectedUser, 10),
-                    isAproved: false
+                    userId,
+                    date: Date.now()
                 };
-        this.setState({reviewText: '', selectedUser: '', disabled: true})
+        this.setState({reviewText: '', disabled: true})
         onReviewCreate(review);
     }
 
@@ -31,7 +31,7 @@ class ReviewForm extends React.Component{
     }
 
     handleBlur = (event) => {
-        let {errors, selectedUser, reviewText} = this.state;
+        let {errors, reviewText} = this.state;
         const target = event.target;
         if (target.value.trim() === '') {
             errors = {
@@ -45,7 +45,7 @@ class ReviewForm extends React.Component{
             delete errors[target.name];
         }
 
-        if (Object.keys(errors).length === 0 && selectedUser.trim() !== '' && reviewText.trim() !== '') {
+        if (Object.keys(errors).length === 0 && reviewText.trim() !== '') {
             this.setState({disabled: false, errors})
         }
         else {
@@ -54,30 +54,12 @@ class ReviewForm extends React.Component{
     }
 
     render(){
-        const {selectedUser, reviewText, errors, disabled} = this.state;
-        const {users} = this.props;
-        const selectItems = users.map((user) => {
-            if (!user.isAdmin) {
-                return <option key={user.id} value={user.id}>{user.firstName} {user.lastName}</option>
-            }
-        });
+        const {reviewText, errors, disabled} = this.state;
 
         return (
             <form onSubmit={this.handleSubmit} autoComplete="off" id="reviewForm">
                 <span>Review input:</span>
                 <div>
-                    <div className={errors.selectedUser ? "invalid" : ""}>
-                        <select
-                            value={selectedUser}
-                            onChange={this.handleChange}
-                            name="selectedUser"
-                            onBlur={this.handleBlur}
-                        >
-                            <option value={''} children="Select user" />
-                            {selectItems}
-                        </select>
-                        <span>{errors.selectedUser && errors.selectedUser.message}</span>
-                    </div>
                     <div className={errors.reviewText ? "invalid" : ""}>
                         <textarea
                             value={reviewText}

@@ -18,6 +18,12 @@ class User extends React.Component{
         onUserDelete(userId);
     }
 
+    handleReviewFormOpen = (userId) => {
+        const {onReviewFormOpen} = this.props;
+        this.closeContextMenu();
+        onReviewFormOpen(userId);
+    }
+
     render(){
         const {user, selectedUserId, onSelectUser} = this.props;
         const {showContextMenu} = this.state;
@@ -38,6 +44,7 @@ class User extends React.Component{
                         showContextMenu={showContextMenu}
                         onContextMenuBtn={this.handleOpenContextMenu}
                         onContextClose={this.closeContextMenu}
+                        onReviewFormOpen={this.handleReviewFormOpen}
                         onUserDelete={this.handleUserDelete}
                     />
                 </div>

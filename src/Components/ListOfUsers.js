@@ -5,7 +5,7 @@ import './ListOfUsers.scss';
 
 class ListOfUsers extends React.Component{
     render(){
-        const {users, selectedUserId, onUserSelect, onUserDelete} = this.props;
+        const {users, selectedUserId, onUserSelect, onReviewFormOpen, onUserDelete, onNewUser} = this.props;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin){
                 return (
@@ -14,6 +14,7 @@ class ListOfUsers extends React.Component{
                         user={user}
                         selectedUserId={selectedUserId}
                         onSelectUser={onUserSelect}
+                        onReviewFormOpen={onReviewFormOpen}
                         onUserDelete={onUserDelete}
                     />)
             }
@@ -21,7 +22,7 @@ class ListOfUsers extends React.Component{
         });
         return(
             <div className="listOfUsersBlock">
-                <button className="simpleButton addUserBtn">Add user</button>
+                <button className="simpleButton addUserBtn" onClick={onNewUser}>Add user</button>
                 <ul>
                     {listOfUsers}
                 </ul>
