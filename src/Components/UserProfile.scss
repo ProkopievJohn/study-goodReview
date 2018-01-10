@@ -1,0 +1,93 @@
+.userProfile {
+    display: inline-block;
+    width: 75%;
+    min-height: 500px;
+    border-left: 2px solid #d5d5d5;
+    border-right: 2px solid #d5d5d5;
+    box-sizing: border-box;
+
+    .userInfoBlock {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        padding-left: 30px;
+        box-sizing: border-box;
+
+        .userAvatar {
+            width: 150px;
+            height: 150px;
+
+            i{
+                font-size: 150px;
+                color: gray;
+            }
+        }
+
+        .userInfo {
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            justify-content: center;
+
+            >div {
+                height: 66px;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+
+                .fieldLable {
+                    color: rgb(99, 95, 95);
+                }
+
+                .fieldText {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+    .reviewsBlock{
+        width: 100%;
+
+        .review{
+            width: 90%;
+            min-height: 75px;
+            border: 2px solid #bbb;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+            border-radius: 2px;
+            margin: 5px auto;
+            padding: 5px;
+            box-sizing: border-box;
+
+            &.notAproved{
+                background-color: gray;
+            }
+
+            .reviewHeader{
+                width: 100%;
+                min-height: 24px;
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 10px;
+                box-sizing: border-box;
+                color: #033;
+
+                .reviewDate{
+                    text-decoration-line: underline;
+                    font-size: 15px;
+                }
+
+                .reviewDeleteBtn{
+                    cursor: pointer;
+                }
+            }
+
+            .reviewText{
+                text-align: left;
+                padding-left: 10px;
+            }
+        }
+    }
+}

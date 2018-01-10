@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ListOfUsers from './Components/ListOfUsers';
+import UserProfile from './Components/UserProfile';
 import PopupsBlock from './Components/PopupsBlock';
 import './App.scss';
 
@@ -47,8 +48,15 @@ class App extends Component {
     this.setState({popups, users, reviews, selectedUserId});
   }
 
+  handleDeleteReview = (reviewId) => {
+    let {reviews, popups} = this.state;
+    reviews = reviews.filter(rev => rev.id !== reviewId);
+    popups.push({message: "Review deleted", id: popupId++});
+    this.setState({reviews, popups});
+  }
+
   render() {
-    const {users, selectedUserId, popups} = this.state;
+    const {reviews, users, selectedUserId, popups} = this.state;
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
@@ -61,6 +69,13 @@ class App extends Component {
             onUserSelect={this.handleUserSelect}
             onUserDelete={this.handleDeleteUser}
           />
+          {selectedUserId !== null &&
+            <UserProfile
+              reviews={reviews.filter(r => r.userId === selectedUserId)}
+              user={users.find(u => u.id === selectedUserId)}
+              onReviewDelete={this.handleDeleteReview}
+            />
+          }
         </div>
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>
       </div>
