@@ -1,3 +1,4 @@
+$default-blue: #5c90d2;
 #userForm{
     min-height: 160px;
 
@@ -44,7 +45,7 @@
     .skillTag{
         border-radius: 4px;
         border: 1px solid #bbb;
-        background-color: #00bcd4;
+        background-color: $default-blue;
         color: white;
         min-width: 20px;
         height: 25px;

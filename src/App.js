@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ListOfUsers from './Components/ListOfUsers';
-<<<<<<< 43e16366bd24e905943ce7bfc63be3b7d77f30fa
-<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
 import UserProfile from './Components/UserProfile';
-=======
-// import UserProfile from './Components/UserProfile';
->>>>>>> added Modal Window, User Form and Review Form components
-import PopupsBlock from './Components/PopupsBlock';
-=======
->>>>>>> Changed Modal Window structure and some fixes
 import ModalWindow from './Components/ModalWindow';
 import PopupsBlock from './Components/PopupsBlock';
 import './App.scss';
@@ -66,17 +58,8 @@ class App extends Component {
     this.setState({reviews, popups});
   }
 
-<<<<<<< 43e16366bd24e905943ce7bfc63be3b7d77f30fa
-<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
-  render() {
-    const {reviews, users, selectedUserId, popups} = this.state;
-=======
-  handleOpenUserForm = () => {
-    this.setState({showModalUserForm: true})
-=======
   handleCloseModalWindow = () => {
     this.setState({showModalWindow: false})
->>>>>>> Changed Modal Window structure and some fixes
   }
 
   handleOpenUserForm = () => {
@@ -104,18 +87,11 @@ class App extends Component {
   render() {
     const {
       users,
+      reviews,
       selectedUserId,
-<<<<<<< 43e16366bd24e905943ce7bfc63be3b7d77f30fa
-      popups,
-      showModalUserForm,
-      showModalReviewForm,
-      procedUserId} = this.state;
->>>>>>> added Modal Window, User Form and Review Form components
-=======
       showModalWindow,
       modalWindowOptions,
       popups} = this.state;
->>>>>>> Changed Modal Window structure and some fixes
     const admin = usersArr.find(user => user.isAdmin === true);
 
     return (
@@ -130,24 +106,13 @@ class App extends Component {
             onReviewFormOpen={this.handleOpenReviewForm}
             onNewUser={this.handleOpenUserForm}
           />
-<<<<<<< 43e16366bd24e905943ce7bfc63be3b7d77f30fa
-<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
           {selectedUserId !== null &&
-=======
-          {/* {selectedUserId !== null &&
->>>>>>> added Modal Window, User Form and Review Form components
             <UserProfile
               reviews={reviews.filter(r => r.userId === selectedUserId)}
               user={users.find(u => u.id === selectedUserId)}
               onReviewDelete={this.handleDeleteReview}
             />
-<<<<<<< 56ce5325884b1557a7b13d4ac0f50e29739ef095
           }
-=======
-          } */}
->>>>>>> added Modal Window, User Form and Review Form components
-=======
->>>>>>> Changed Modal Window structure and some fixes
         </div>
         <ModalWindow showModalWindow={showModalWindow} options={modalWindowOptions} onCloseModalWindow={this.handleCloseModalWindow}/>
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>

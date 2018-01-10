@@ -28,7 +28,7 @@ body {
   font-family: sans-serif;
 }
 
-$default-blue: #00bcd4;
+$default-blue: #5c90d2;
 
 .simpleButton{
   background-color: $default-blue;
@@ -43,7 +43,8 @@ $default-blue: #00bcd4;
   text-transform: uppercase;
 
   &:hover{
-    background-color: rgba($default-blue, 0.6);
+    background-color: rgba($default-blue, 0.7);
+    box-shadow: none;
   }
 
   &:disabled{
