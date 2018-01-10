@@ -123,16 +123,14 @@ class App extends Component {
           }
         </div>
         {showModalUserForm &&
-          <ModalWindow
-            onCloseModalWindow={this.handleCloseUserForm}
-            form={<UserForm onUserFormSubmit={this.handleUserFormSubmit}/>}
-          />
+          <ModalWindow onCloseModalWindow={this.handleCloseUserForm}>
+            <UserForm onUserFormSubmit={this.handleUserFormSubmit}/>
+          </ModalWindow>
         }
         {showModalReviewForm &&
-           <ModalWindow
-            onCloseModalWindow={this.handleCloseReviewForm}
-            form={<ReviewForm userId={proceedUserId} onReviewCreated={this.handleReviewCreated}/>}
-          />
+           <ModalWindow onCloseModalWindow={this.handleCloseReviewForm}>
+              <ReviewForm userId={proceedUserId} onReviewCreated={this.handleReviewCreated}/>
+            </ModalWindow>
         }
         <PopupsBlock popups={popups} onPopupClose={this.handlePopupClose}/>
       </div>

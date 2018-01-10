@@ -3,7 +3,7 @@ import './ModalWindow.scss';
 
 class ModalWindow extends React.Component{
     render(){
-        const {form, onCloseModalWindow} = this.props;
+        const {onCloseModalWindow, children} = this.props;
         return(
             <div className="overlay">
                 <div className="modalWindow">
@@ -11,7 +11,7 @@ class ModalWindow extends React.Component{
                         <i className="material-icons">close</i>
                     </span>
                     <div className="modalWindowBody">
-                        {form}
+                        {children}
                     </div>
                 </div>
             </div>
