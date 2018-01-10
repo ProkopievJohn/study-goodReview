@@ -2,7 +2,7 @@ import React from 'react';
 
 class ContextMenuBlock extends React.Component{
     render(){
-        const {userId, showContextMenu, onContextMenuBtn, onContextClose, onUserDelete} = this.props;
+        const {userId, showContextMenu, onContextMenuBtn, onContextClose, onReviewFormOpen, onUserDelete} = this.props;
         return(
             <div className="contextMenuBlock">
                 <div className="contextMenuBtn" onClick={onContextMenuBtn}>
@@ -10,7 +10,7 @@ class ContextMenuBlock extends React.Component{
                 </div>
                 <div className={showContextMenu === true ? "contextMenu open" : "contextMenu"}>
                     <div className="contextMenuBody">
-                        <div>Add review</div>
+                        <div onClick={() => onReviewFormOpen(userId)}>Add review</div>
                         <div onClick={() => onUserDelete(userId)}>Delete user</div>
                     </div>
                     <div className="contextMenuOverlay" onClick={onContextClose}></div>

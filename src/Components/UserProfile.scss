@@ -1,6 +1,6 @@
 .userProfile {
     display: inline-block;
-    width: 75%;
+    width: 80%;
     min-height: 500px;
     border-left: 2px solid #d5d5d5;
     border-right: 2px solid #d5d5d5;
@@ -87,6 +87,7 @@
             .reviewText{
                 text-align: left;
                 padding-left: 10px;
+                white-space: pre-line;
             }
         }
     }

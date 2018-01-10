@@ -28,12 +28,14 @@ body {
   font-family: sans-serif;
 }
 
+$default-blue: #5c90d2;
+
 .simpleButton{
-  background-color: rgb(0, 188, 212);
+  background-color: $default-blue;
   border: 10px;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-  color: rgb(255, 255, 255);
+  color: white;
   font-size: 14px;
   font-weight: 500;
   height: 36px;
@@ -41,7 +43,8 @@ body {
   text-transform: uppercase;
 
   &:hover{
-    background-color: rgba(0, 187, 212, 0.6);
+    background-color: rgba($default-blue, 0.7);
+    box-shadow: none;
   }
 
   &:disabled{
