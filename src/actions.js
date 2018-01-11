@@ -10,18 +10,18 @@ export function createUser(firstName, lastName, skills) {
 
 export function removeUser(userId) {
     return dispatch => {
-        dispatch({type: "REMOVE_USER", userId});
-        dispatch({type: "DESELECT_USER", userId});
-        dispatch({type: "REMOVE_USER_REVIEWS", userId});
-        dispatch({type: "SHOW_POPUP", message: "User deleted"});
+        dispatch({type: types.REMOVE_USER, userId});
+        dispatch({type: types.DESELECT_USER, userId});
+        dispatch({type: types.REMOVE_USER_REVIEWS, userId});
+        dispatch({type: types.SHOW_POPUP, message: "User deleted"});
     };
 }
 
 export function createReview(reviewText, userId) {
     return dispatch => {
-        dispatch({type: "ADD_REVIEW", reviewText, userId});
-        dispatch({type: "CLOSE_REVIEW_FORM"});
-        dispatch({type: "SHOW_POPUP",message: "New review created"});
+        dispatch({type: types.ADD_REVIEW, reviewText, userId});
+        dispatch({type: types.CLOSE_REVIEW_FORM});
+        dispatch({type: types.SHOW_POPUP,message: "New review created"});
     };
 }
 
