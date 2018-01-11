@@ -12,35 +12,33 @@ import PopupsBlock from './Components/PopupsBlock';
 import './App.scss';
 
 class App extends Component {
-  render() {
-    const {
-      users,
-      reviews,
-      selectedUserId,
-      modalForms,
-      dispatch
-    } = this.props;
-    const admin = users.find(user => user.isAdmin === true);
 
+  closeUserForm = () => {
+    const {dispatch} = this.props;
+    dispatch({type: "CLOSE_USER_FORM"});
+  }
+
+  closeReviewForm = () => {
+    const {dispatch} = this.props;
+    dispatch({type: "CLOSE_REVIEW_FORM"});
+  }
+
+  render() {
+    const {selectedUserId, ui} = this.props;
     return (
       <div className="App">
-        <Header account={admin}/>
+        <Header/>
         <div className="content">
-          <ListOfUsers users={users}/>
-          {selectedUserId !== null &&
-            <UserProfile
-              reviews={reviews.filter(r => r.userId === selectedUserId)}
-              user={users.find(u => u.id === selectedUserId)}
-            />
-          }
+          <ListOfUsers/>
+          {selectedUserId && <UserProfile/>}
         </div>
-        {modalForms.showModalUserForm &&
-          <ModalWindow onCloseModalWindow={() => dispatch({type: "CLOSE_USER_FORM"})}>
+        {ui.showModalUserForm &&
+          <ModalWindow onCloseModalWindow={this.closeUserForm}>
             <UserForm/>
           </ModalWindow>
         }
-        {modalForms.showModalReviewForm &&
-          <ModalWindow onCloseModalWindow={() => dispatch({type: "CLOSE_REVIEW_FORM"})}>
+        {ui.showModalReviewForm &&
+          <ModalWindow onCloseModalWindow={this.closeReviewForm}>
             <ReviewForm/>
           </ModalWindow>
         }
@@ -52,10 +50,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users,
-    reviews: state.reviews,
-    selectedUserId: state.ui.selectedUserId,
-    modalForms: state.modalForms
+    selectedUserId: state.profile.selectedUserId,
+    ui: state.ui
   };
 }
 

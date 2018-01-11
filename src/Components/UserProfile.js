@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
 import Review from './Review';
 
 import './UserProfile.scss'
@@ -8,8 +9,7 @@ class UserProfile extends React.Component{
 
     handleReviewDelete = (id) => {
         const {dispatch} = this.props;
-        dispatch({type: "REMOVE_REVIEW", id});
-        dispatch({type: "SHOW_POPUP", message: "Review deleted"})
+        dispatch(actions.removeReview(id));
     }
 
     render(){
@@ -44,4 +44,11 @@ class UserProfile extends React.Component{
     }
 }
 
-export default connect()(UserProfile);
+function mapStateToProps(state) {
+    return {
+        user: state.users.find(u => u.id === state.profile.selectedUserId),
+        reviews: state.reviews.filter(r => r.userId === state.profile.selectedUserId)
+    };
+}
+
+export default connect(mapStateToProps)(UserProfile);

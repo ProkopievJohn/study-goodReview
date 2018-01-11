@@ -25,14 +25,20 @@ class Popup extends React.Component {
 }
 
 class PopupsBlock extends React.Component {
+
+    closePopup = (id) => {
+        const {dispatch} = this.props;
+        dispatch({type:"CLOSE_POPUP", id});
+    }
+
     render() {
-        const {popups, dispatch} = this.props;
-        const listOfPopups = popups.map((pup) =>
+        const {popups} = this.props;
+        const listOfPopups = popups && popups.map((pup) =>
             <Popup
                 key={pup.id}
                 msg={pup.message}
                 id={pup.id}
-                onPopupClose={() => dispatch({type:"CLOSE_POPUP", id: pup.id})}
+                onPopupClose={() => this.closePopup(pup.id)}
             />
         );
 
@@ -46,7 +52,7 @@ class PopupsBlock extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        popups: state.popups
+        popups: state.ui.popups
     };
 }
 

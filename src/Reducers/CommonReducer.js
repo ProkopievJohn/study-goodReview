@@ -3,15 +3,13 @@ import { combineReducers } from 'redux'
 import users from './Users';
 import reviews from './Reviews';
 import ui from './Ui';
-import modalForms from './ModalForms';
-import popups from './Popups';
+import profile from './Profile';
 
 const commonReducer = combineReducers({
     users,
     reviews,
     ui,
-    modalForms,
-    popups
+    profile
 });
 
 export default commonReducer;

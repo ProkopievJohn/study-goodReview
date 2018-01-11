@@ -4,8 +4,14 @@ import User from './User';
 import './ListOfUsers.scss';
 
 class ListOfUsers extends React.Component{
+
+    openUserForm = () => {
+        const {dispatch} = this.props;
+        dispatch({type: 'OPEN_USER_FORM'});
+    }
+
     render(){
-        const {users, dispatch} = this.props;
+        const {users} = this.props;
         const listOfUsers = users.map(user => {
             if (!user.isAdmin){
                 return (<User key={user.id} user={user} />)
@@ -14,7 +20,7 @@ class ListOfUsers extends React.Component{
         });
         return(
             <div className="listOfUsersBlock">
-                <button className="simpleButton addUserBtn" onClick={() => dispatch({type: 'OPEN_USER_FORM'})}>Add user</button>
+                <button className="simpleButton addUserBtn" onClick={this.openUserForm}>Add user</button>
                 <ul>
                     {listOfUsers}
                 </ul>
@@ -23,4 +29,10 @@ class ListOfUsers extends React.Component{
     }
 }
 
-export default connect()(ListOfUsers);
+function mapStateToProps(state) {
+    return {
+        users: state.users
+    };
+}
+
+export default connect(mapStateToProps)(ListOfUsers);

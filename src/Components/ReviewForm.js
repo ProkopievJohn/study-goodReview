@@ -1,6 +1,7 @@
 import React from 'react';
-import './ReviewForm.scss';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
+import './ReviewForm.scss';
 
 class ReviewForm extends React.Component{
     state = {
@@ -12,10 +13,8 @@ class ReviewForm extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
         const {reviewText} = this.state;
-        const {dispatch, userId} = this.props;
-        dispatch({type: "ADD_REVIEW", reviewText, userId});
-        dispatch({type: "CLOSE_REVIEW_FORM"});
-        dispatch({type: "SHOW_POPUP",message: "New review created"});
+        const {dispatch, proceedUserId} = this.props;
+        dispatch(actions.createReview(reviewText, proceedUserId))
         this.setState({reviewText: '', disabled: true})
     }
 
@@ -75,7 +74,7 @@ class ReviewForm extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        userId: state.modalForms.proceedUserId
+        proceedUserId: state.ui.proceedUserId
     };
 }
 

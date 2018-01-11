@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './Header.scss';
 
 class Header extends React.Component{
@@ -24,4 +25,10 @@ class Header extends React.Component{
     }
 }
 
-export default Header;
+function mapStateToProps(state) {
+    return {
+        account: state.users.find(user => user.isAdmin === true)
+    };
+}
+
+export default connect(mapStateToProps)(Header);
