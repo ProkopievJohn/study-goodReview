@@ -1,15 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Review from './Review';
 
 import './UserProfile.scss'
 
 class UserProfile extends React.Component{
+
+    handleReviewDelete = (id) => {
+        const {dispatch} = this.props;
+        dispatch({type: "REMOVE_REVIEW", id});
+        dispatch({type: "SHOW_POPUP", message: "Review deleted"})
+    }
+
     render(){
-        const {user, reviews, onReviewDelete} = this.props;
+        const {user, reviews} = this.props;
         reviews.sort((r1,r2) => {
             return r2.date - r1.date;
         })
-        const reviewsList = reviews.map(review => <Review key={review.id} review={review} onReviewDelete={onReviewDelete}/>);
+        const reviewsList = reviews.map(review => <Review key={review.id} review={review} onReviewDelete={() => this.handleReviewDelete(review.id)}/>);
         return(
             <div className="userProfile">
                 <div className="userInfoBlock">
@@ -36,4 +44,4 @@ class UserProfile extends React.Component{
     }
 }
 
-export default UserProfile;
+export default connect()(UserProfile);

@@ -1,8 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './UserForm.scss';
-
-let userId = 4;
-
 class UserForm extends React.Component {
     state = {
         firstName: '',
@@ -16,16 +14,11 @@ class UserForm extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const {firstName, lastName, skills} = this.state;
-        const {onUserFormSubmit} = this.props;
+        const {dispatch} = this.props;
 
-        const user = {
-            id: userId++,
-            firstName,
-            lastName,
-            isAdmin: false,
-            skills
-        }
-        onUserFormSubmit(user);
+        dispatch({type: "ADD_USER", firstName, lastName, skills});
+        dispatch({type: "CLOSE_USER_FORM"});
+        dispatch({type: "SHOW_POPUP", message: "New user created"});
         this.setState({firstName: '', lastName: '', skills: [], disabled: true});
     }
 
@@ -138,4 +131,4 @@ class UserForm extends React.Component {
     }
 }
 
-export default UserForm;
+export default connect()(UserForm);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ContextMenuBlock from './ContextMenuBlock';
 
 class User extends React.Component{
@@ -13,25 +14,28 @@ class User extends React.Component{
     }
 
     handleUserDelete = (userId) => {
-        const {onUserDelete} = this.props;
+        const {dispatch} = this.props;
         this.closeContextMenu();
-        onUserDelete(userId);
+        dispatch({type: "REMOVE_USER", userId});
+        dispatch({type: "DESELECT_USER", userId});
+        dispatch({type: "REMOVE_USER_REVIEWS", userId});
+        dispatch({type: "SHOW_POPUP", message: "User deleted"});
     }
 
     handleReviewFormOpen = (userId) => {
-        const {onReviewFormOpen} = this.props;
+        const {dispatch} = this.props;
         this.closeContextMenu();
-        onReviewFormOpen(userId);
+        dispatch({type: "OPEN_REVIEW_FORM", userId: userId});
     }
 
     render(){
-        const {user, selectedUserId, onSelectUser} = this.props;
+        const {user, selectedUserId, dispatch} = this.props;
         const {showContextMenu} = this.state;
 
         return(
             <li>
                 <div className={selectedUserId !== user.id ? "usersListItem" : "usersListItem active"}>
-                    <div className="user" onClick={() => onSelectUser(user.id)}>
+                    <div className="user" onClick={() => dispatch({type: "SELECT_USER", userId: user.id})}>
                         <span className="userIcon" >
                             <i className="material-icons">person</i>
                         </span>
@@ -53,4 +57,10 @@ class User extends React.Component{
     }
 }
 
-export default User;
+const mapStateToProps = (state) => {
+    return {selectedUserId: state.ui.selectedUserId};
+}
+
+export default connect(
+    mapStateToProps,
+)(User);
