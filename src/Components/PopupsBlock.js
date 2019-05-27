@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './PopupsBlock.scss';
 
 class Popup extends React.Component {
@@ -7,9 +8,9 @@ class Popup extends React.Component {
     }
 
     componentDidMount(){
-        const {onPopupClose, id} = this.props;
+        const {onPopupClose} = this.props;
         setTimeout(() => this.setState({show: false}), 1000);
-        setTimeout(() => onPopupClose(id), 1800);
+        setTimeout(onPopupClose, 1800);
     }
 
     render() {
@@ -24,14 +25,20 @@ class Popup extends React.Component {
 }
 
 class PopupsBlock extends React.Component {
+
+    closePopup = (id) => {
+        const {dispatch} = this.props;
+        dispatch({type:"CLOSE_POPUP", id});
+    }
+
     render() {
-        const {onPopupClose, popups} = this.props;
-        const listOfPopups = popups.map((msg) =>
+        const {popups} = this.props;
+        const listOfPopups = popups && popups.map((pup) =>
             <Popup
-                key={msg.id}
-                msg={msg.message}
-                id={msg.id}
-                onPopupClose={onPopupClose}
+                key={pup.id}
+                msg={pup.message}
+                id={pup.id}
+                onPopupClose={() => this.closePopup(pup.id)}
             />
         );
 
@@ -42,4 +49,11 @@ class PopupsBlock extends React.Component {
         );
     }
 }
-export default PopupsBlock;
+
+function mapStateToProps(state) {
+    return {
+        popups: state.ui.popups
+    };
+}
+
+export default connect(mapStateToProps)(PopupsBlock);

@@ -4,6 +4,7 @@
     display: block;
     padding-top: 12px;
     width: 20%;
+    min-width: 180px;
 
     .addUserBtn{
         width: 80%;
@@ -45,7 +46,7 @@
                 display: inline-flex;
                 align-items: center;
                 height: 40px;
-                width: 90%;
+                width: calc(100% - 28px);
                 cursor: pointer;
                 border: 2px solid rgba(0, 0, 0, 0);
 
@@ -69,7 +70,7 @@
             }
 
             .contextMenuBlock{
-                width: 10%;
+                width: 28px;
                 display: inline-flex;
                 align-items: center;
 

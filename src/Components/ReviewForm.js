@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import './ReviewForm.scss';
-
-var reviewId = 6;
 
 class ReviewForm extends React.Component{
     state = {
@@ -13,16 +13,9 @@ class ReviewForm extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
         const {reviewText} = this.state;
-        const {onReviewCreated, userId} = this.props;
-        const review = {
-                    id: reviewId++,
-                    reviewText,
-                    userId,
-                    isAproved: false,
-                    date: Date.now()
-                };
+        const {dispatch, proceedUserId} = this.props;
+        dispatch(actions.createReview(reviewText, proceedUserId))
         this.setState({reviewText: '', disabled: true})
-        onReviewCreated(review);
     }
 
     handleChange = (event) => {
@@ -79,4 +72,10 @@ class ReviewForm extends React.Component{
     }
 }
 
-export default ReviewForm;
+function mapStateToProps(state) {
+    return {
+        proceedUserId: state.ui.proceedUserId
+    };
+}
+
+export default connect(mapStateToProps)(ReviewForm);
